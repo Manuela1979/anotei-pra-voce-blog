@@ -1,0 +1,24 @@
+---
+layout: base.njk
+---
+
+<article class="post-content">
+    <h1>{{ title }}</h1>
+    <p class="post-meta">
+        <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+        {% if category %}
+            | Categoria: <a href="/categorias/{{ category | slugify }}/">{{ category }}</a>
+        {% endif %}
+    </p>
+
+    {{ content | safe }}
+
+    {% if original_url %}
+        <p class="original-link">Fonte original: <a href="{{ original_url }}" target="_blank" rel="noopener noreferrer">{{ original_url }}</a></p>
+    {% endif %}
+
+</article>
+
+<nav aria-label="Navegação de posts">
+    <a href="/">&larr; Voltar para o início</a>
+</nav>

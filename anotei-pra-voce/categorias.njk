@@ -1,0 +1,37 @@
+---
+layout: base.njk
+pagination:
+  data: collections.categories
+  size: 1
+  alias: categoryName
+permalink: /categorias/{{ categoryName | slugify }}/index.html
+title: "Categoria: {{ categoryName }}" # Definindo o título diretamente aqui
+---
+
+<h1>Categoria: {{ categoryName }}</h1>
+
+{# Filter the main post collection directly #}
+{% set postslist = collections.post | filterByCategory(categoryName) | reverse %}
+
+<section class="post-list-section">
+    <ul class="post-list">
+        {% for post in postslist %}
+            <li class="post-list-item">
+                <h3 class="post-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
+                <p class="post-meta">
+                    <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                </p>
+                {% if post.data.excerpt %}
+                    <p class="post-excerpt">{{ post.data.excerpt }}</p>
+                {% endif %}
+                <a href="{{ post.url | url }}" class="read-more">Ler mais...</a>
+            </li>
+        {% else %}
+            <li>Nenhuma anotação encontrada nesta categoria ainda.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<nav aria-label="Navegação de categorias">
+    <a href="/">&larr; Voltar para o início</a>
+</nav>

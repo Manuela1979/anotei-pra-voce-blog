@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: Início
+---
+
+{# Adicionar um h1 para a página inicial #}
+<h1>Últimas Anotações</h1>
+
+{# Aqui listaremos os posts. Por enquanto, deixaremos um placeholder. #}
+{# A lógica de listagem por categoria será implementada depois #}
+
+{% set postslist = collections.post | reverse %}
+
+<section class="post-list-section">
+    <h2>Todas as Anotações</h2>
+    <ul class="post-list">
+        {% for post in postslist %}
+            <li class="post-list-item">
+                <h3 class="post-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
+                <p class="post-meta">
+                    <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                    {% if post.data.category %}
+                        | Categoria: <a href="/categorias/{{ post.data.category | slugify }}/">{{ post.data.category }}</a>
+                    {% endif %}
+                </p>
+                {% if post.data.excerpt %}
+                    <p class="post-excerpt">{{ post.data.excerpt }}</p>
+                {% endif %}
+                <a href="{{ post.url | url }}" class="read-more">Ler mais...</a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{# Adicionar filtros Nunjucks para datas e slugs se não existirem no eleventy.config.js #}
+{# Estes serão adicionados ao eleventy.config.js posteriormente #}
