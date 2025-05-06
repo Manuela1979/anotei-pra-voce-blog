@@ -1,30 +1,50 @@
 backend:
   name: git-gateway
-  branch: main # Ou a branch que você usará (ex: master)
+  branch: main
 
-media_folder: "assets/img"
-public_folder: "/assets/img"
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://anoteipravc.netlify.app
+display_url: https://anoteipravc.netlify.app
 
 collections:
-  - name: "posts"
-    label: "Anotações"
-    folder: "posts"
+  - name: "receitas"
+    label: "Receitas Rápidas"
+    folder: "posts/receitas"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    path: "{{category}}/{{slug}}" # Salva em posts/categoria/slug.md
+    slug: "{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Data de Publicação", name: "date", widget: "datetime" }
-      - { label: "Categoria", name: "category", widget: "select", options: ["Receitas", "Dicas para Casa", "Frases e Reflexões"] }
-      - { label: "Resumo Curto (Opcional)", name: "excerpt", widget: "text", required: false }
-      - { label: "Link Original (Opcional)", name: "original_url", widget: "string", required: false }
-      - { label: "Conteúdo Principal", name: "body", widget: "markdown" }
-      # Adicionar o layout automaticamente
-      - { label: "Layout", name: "layout", widget: "hidden", default: "post.njk" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
 
-# Configurações de internacionalização (opcional, mas bom ter)
-locale: 'pt'
+  - name: "casa"
+    label: "Dicas para Casa"
+    folder: "posts/casa"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
 
-# Configurações do editor
-editor:
-  preview_style: "assets/css/style.css" # Para usar o CSS do blog na pré-visualização
+  - name: "saude"
+    label: "Saúde e Bem-estar"
+    folder: "posts/saude"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
+
+  - name: "tecnologia"
+    label: "Tecnologia do Dia a Dia"
+    folder: "posts/tecnologia"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
